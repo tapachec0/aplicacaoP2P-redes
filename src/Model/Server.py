@@ -1,3 +1,4 @@
+import Model.Client as Client
 import socket
 import threading
 import sys
@@ -7,9 +8,9 @@ from random import randint
 class Server:
     connections = []
     peers = []
-    def __init__(self):
+    def __init__(self, ip_address, port=4400):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.bind(('0.0.0.0', 10000))
+        sock.bind((ip_address, port))
         '''Instrui o sistema operacional para colocar o socket em modo passivo'''
         sock.listen(1)
         print("Server running...")
@@ -46,40 +47,14 @@ class Server:
         for connection in self.connections:
             connection.send(b'\x11' + bytes(p, 'utf-8'))
 
-class Client:
-    def sendMsg(self, sock):
-        while True:
-            sock.send(bytes(input(""), 'utf-8'))
-
-    def __init__(self, address):
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.connect((address, 10000))
-
-        iThread = threading.Thread(target=self.sendMsg, args=(sock,))
-        iThread.daemon = True
-        iThread.start()
-
-        while True:
-            data = sock.recv(1024)
-            if not data:
-                break
-            if data[0:1] == b'\x11':
-                self.updatePeers(data[1:])
-            else:
-                print(str(data, 'utf-8'))
-
-    def updatePeers(self, peerData):
-        p2p.peers = str(peerData, "utf-8").split(",")[:-1]
-
-class p2p:
-    peers = ['172.20.4.174']
-    
+class P2P:
+    peers=['127.390.0.1']
 
 while True:
     try:
         print("Trying to connect...")
         time.sleep(randint(1,5))
-        for peer in p2p.peers:
+        for peer in P2P.peers:
             try:
                 client = Client(peer)
 
