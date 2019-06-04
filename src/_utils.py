@@ -24,7 +24,7 @@ def set_connection():
                     sys.exit(0)
                 except:
                     pass
-    
+
                 try:
                     server = Server(ip_address=ip_address, nickname=nickname)
                 except KeyboardInterrupt:

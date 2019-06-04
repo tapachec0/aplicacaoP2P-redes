@@ -11,7 +11,7 @@ def menu_principal():
     print("\n0 - Sair")
     print("1 - Juntar-se a sala existente")
     print("2 - Criar nova sala")
-    print("3 - Ajustar configurações")
+    print("3 - Sair")
     
     while True:
         command = int(input('{}: '.format(nickname)))
@@ -21,6 +21,8 @@ def menu_principal():
             join_room(nickname)
         elif command == 2:
             _utils.set_connection()
+        elif command == 3:
+            break
     
 def join_room(nickname):
     class_ip=input("Insira o IP da sala a qual deseja se juntar: ")
