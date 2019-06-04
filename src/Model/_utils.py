@@ -1,0 +1,1 @@
+"Script para escrever funções úteis a serem utilizadas no software."
